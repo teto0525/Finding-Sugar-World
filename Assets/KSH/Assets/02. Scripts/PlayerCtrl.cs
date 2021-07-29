@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
+
     //앞뒤좌우 + 턴
     private float h;
     private float v;
@@ -15,11 +16,14 @@ public class PlayerCtrl : MonoBehaviour
     public float turnSpeed = 200f;
 
     //애니메이션 저장할 변수 지정
-
+    private Animation anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animation>();
+
+        anim.Play("Idle");
     }
 
     // Update is called once per frame
@@ -34,5 +38,31 @@ public class PlayerCtrl : MonoBehaviour
 
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
+
+        PlayerAnim();
+    }
+
+    void PlayerAnim()
+    {
+        if (v >= 0.1f)
+        {
+            anim.CrossFade("RunF", 0.3f);
+        }
+        else if (v <= -0.1f)
+        {
+            anim.CrossFade("RunB", 0.3f);
+        }
+        else if (v >= 0.1f)
+        {
+            anim.CrossFade("RunR", 0.3f);
+        }
+        else if (v >= -0.1f)
+        {
+            anim.CrossFade("RunL", 0.3f);
+        }
+        else
+        {
+            anim.CrossFade("Idle", 0.3f);
+        }
     }
 }
