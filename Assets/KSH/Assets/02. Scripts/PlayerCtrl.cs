@@ -16,14 +16,14 @@ public class PlayerCtrl : MonoBehaviour
     public float turnSpeed = 200f;
 
     //애니메이션 저장할 변수 지정
-    private Animation anim;
+    private Animator anim;
+    private Rigidbody rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animation>();
-
-        anim.Play("Idle");
+        anim = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -39,30 +39,69 @@ public class PlayerCtrl : MonoBehaviour
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
 
+        //두디로 이동시 옆으로 이동 불가능
+        if (v <= 0)
+        {
+            h = 0;
+        }
+        rigidbody.velocity = new Vector3(v, 0, h);
+
         PlayerAnim();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Enemy")
+        {
+            Debug.Log("충돌 감지");
+            anim.Play("Hit");
+            this.transform.Translate(Vector3.back * 5.0f * Time.deltaTime);
+        }
+    }
+
+
     void PlayerAnim()
     {
-        if (v >= 0.1f)
+        if(v < 0.0f)
         {
-            anim.CrossFade("RunF", 0.3f);
+            anim.SetTrigger("Walk_B");
         }
-        else if (v <= -0.1f)
+        else if(v > 0.0f)
         {
-            anim.CrossFade("RunB", 0.3f);
+            anim.SetTrigger("Walk_F");
+            v = 0;
         }
-        else if (v >= 0.1f)
+        else if(Input.GetButtonDown("Fire1"))
         {
-            anim.CrossFade("RunR", 0.3f);
+            anim.SetTrigger("Attack");
         }
-        else if (v >= -0.1f)
+        else if(Input.GetButtonDown("Jump"))
         {
-            anim.CrossFade("RunL", 0.3f);
+            anim.SetTrigger("Jump");
         }
         else
         {
-            anim.CrossFade("Idle", 0.3f);
+            anim.SetTrigger("Idle");
         }
+        //if (v >= 0.1f)
+        //{
+        //    anim.CrossFade("RunF", 0.3f);
+        //}
+        //else if (v <= -0.1f)
+        //{
+        //    anim.CrossFade("RunB", 0.3f);
+        //}
+        //else if (h >= 0.1f)
+        //{
+        //    anim.CrossFade("RunR", 0.3f);
+        //}
+        //else if (h >= -0.1f)
+        //{
+        //    anim.CrossFade("RunL", 0.3f);
+        //}
+        //else
+        //{
+        //    anim.CrossFade("Idle", 0.3f);
+        //}
     }
 }
