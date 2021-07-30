@@ -39,7 +39,7 @@ public class PlayerCtrl : MonoBehaviour
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
 
-        //두디로 이동시 옆으로 이동 불가능
+        //뒤로 이동시 옆으로 이동 불가능
         if (v <= 0)
         {
             h = 0;
