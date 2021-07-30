@@ -20,6 +20,7 @@ public class Boss_move : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.collider.tag == "Player")
         {
             anim.SetBool("attack", true);
