@@ -6,11 +6,14 @@ using UnityEngine;
 //´êÀ¸¸é Á×´Â´Ù
 public class Player : MonoBehaviour
 {
-    public int speed = 10;
+    private float h;
+    private float v;
+
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
-
+        speed = 5.0f;
     }
 
     // Update is called once per frame
@@ -18,13 +21,9 @@ public class Player : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        Vector3 dir = new Vector3(h, v, 0);
-        transform.Translate(dir * speed * Time.deltaTime);
+
+        Vector3 dir = (Vector3.right * h) + (Vector3.forward * v);
+        transform.Translate(dir.normalized * speed * Time.deltaTime);
         //transform.position+=dir*speed*Time.deltaTime;
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        //Àå¾Ö¹°¿¡ ´êÀ¸¸é Á×´Â´Ù
-        Destroy(other.gameObject);
     }
 }
