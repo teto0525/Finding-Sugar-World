@@ -19,7 +19,8 @@ public class Enemy_Attack : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         
-        if (collision.collider.tag=="Player") {
+        if (collision.collider.tag=="Player") 
+        {
             anim.SetBool("attack", true);
 
             if (collision.collider.tag == "Sword")
