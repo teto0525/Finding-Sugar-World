@@ -5,7 +5,6 @@ using UnityEngine;
 public class Boss_move : MonoBehaviour
 {
     private Animator anim;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -15,27 +14,26 @@ public class Boss_move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
+    }
     private void OnCollisionEnter(Collision collision)
     {
 
         if (collision.collider.tag == "Player")
         {
-            anim.SetBool("attack", true);
+            anim.SetBool("ATTACK", true);
 
             if (collision.collider.tag == "Sword")
             {
                 //anim.Play("die");
 
-                anim.SetBool("death", true);
-                // Destroy(gameObject);
+                anim.SetBool("DIE", true);
+                Destroy(gameObject, 2.0f);
             }
         }
         else
         {
-            anim.SetBool("attack", false);
+            anim.SetBool("ATTACK", false);
         }
     }
 }
