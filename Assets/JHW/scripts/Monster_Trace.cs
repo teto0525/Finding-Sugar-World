@@ -19,7 +19,8 @@ public class Monster_Trace : MonoBehaviour
     void Update()
     {
 
-        float distance = Vector3.Distance(PlayerTR.position, monsterTR.position);
+    float distance = Vector3.Distance(PlayerTR.position, monsterTR.position);
+        
 
         if (distance<=5.0f) {
             monsterTR = gameObject.GetComponent<Transform>();

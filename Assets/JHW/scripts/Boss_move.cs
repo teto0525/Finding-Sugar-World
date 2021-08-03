@@ -23,13 +23,15 @@ public class Boss_move : MonoBehaviour
         {
             anim.SetBool("ATTACK", true);
 
-            if (collision.collider.tag == "Sword")
-            {
-                //anim.Play("die");
+            
+        }
 
-                anim.SetBool("DIE", true);
-                Destroy(gameObject, 2.0f);
-            }
+        else if (collision.collider.tag == "Sword")
+        {
+            //anim.Play("die");
+
+            anim.SetBool("DIE", true);
+            Destroy(gameObject, 5.0f);
         }
         else
         {
