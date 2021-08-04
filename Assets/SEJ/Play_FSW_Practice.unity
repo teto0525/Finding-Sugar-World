@@ -2349,6 +2349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f556ba6d30541924c8e80b6d0727dcbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dgAudio: {fileID: 8300000, guid: c0f5786f639278d479c9da914217fdad, type: 3}
 --- !u!1 &139085483 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1220181555783000, guid: a40a8a92b560ab247bc4a1b6a6744af4, type: 3}
@@ -3611,7 +3612,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744228076}
-  m_LocalRotation: {x: 0.09930903, y: 0, z: 0, w: 0.9950566}
+  m_LocalRotation: {x: 0.09930903, y: -1e-45, z: -0, w: 0.9950566}
   m_LocalPosition: {x: -77, y: 6.79, z: -35.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4600,7 +4601,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 27
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4625,8 +4626,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471724282}
-  m_LocalRotation: {x: 0.09930903, y: 0, z: 0, w: 0.9950566}
-  m_LocalPosition: {x: -77, y: 6.79, z: -35.38}
+  m_LocalRotation: {x: -0.046818938, y: -0.0036340463, z: -0.0001582704, w: 0.9988968}
+  m_LocalPosition: {x: -76.52437, y: 5.749232, z: -64.128174}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
