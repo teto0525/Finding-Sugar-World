@@ -17,7 +17,6 @@ public class Monster_Trace : MonoBehaviour
     //3. DIE
     int state = 0;
 
-
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -32,7 +31,8 @@ public class Monster_Trace : MonoBehaviour
 
         float distance = Vector3.Distance(MonsterTR.position, PlayerTR.position);
 
-        if (distance <= 9.0f)
+        //거리 안이면 추적
+        if (distance <= 15.0f)
         {
             nvAgent.destination = PlayerTR.position;
 
@@ -41,13 +41,9 @@ public class Monster_Trace : MonoBehaviour
                 state = 1;
                 anim.SetTrigger("TRACE");
             }
-            else if (state == 2)
-            {
-                nvAgent.destination = MonsterTR.position;
-            }
-
         }
-        //9m 밖이면 무조건 대기모션
+
+        //거리 밖이면 무조건 대기모션
         else
         {
             if (state != 0)
@@ -65,19 +61,16 @@ public class Monster_Trace : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            state = 2;
+            nvAgent.destination = MonsterTR.position;
             anim.SetTrigger("ATTACK");
-  
+            state = 2;
         }
 
+        //else if (collision.collider.tag == "Sword")    
+        //{    
+        //    anim.SetTrigger("DIE");    
 
-        //else if (collision.collider.tag == "Sword")
-        //{
-        //    anim.SetTrigger("DIE");
-
-        //}
+        //}    
     }
-
-
 
 }
