@@ -18,11 +18,13 @@ public class PlayerCtrl : MonoBehaviour
     //애니메이션 저장할 변수 지정
     private Animator anim;
     private Animation anime;
+    Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -35,7 +37,8 @@ public class PlayerCtrl : MonoBehaviour
         //대각선 방향 이동
         Vector3 dir = ((Vector3.right * h) + (Vector3.forward * v));
 
-        transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
+        //transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
+        rb.position += dir.normalized * moveSpeed * Time.deltaTime;
         transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
 
         //뒤로 이동시 옆으로 이동 불가능
