@@ -991,7 +991,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744228076}
-  m_LocalRotation: {x: 0.099309005, y: 0.000000027406841, z: -0.0000000027352673, w: 0.9950566}
+  m_LocalRotation: {x: 0.099309005, y: 0.000000027406843, z: -0.0000000027352678, w: 0.9950566}
   m_LocalPosition: {x: 0, y: 1.59, z: -2.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1538,7 +1538,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471724282}
-  m_LocalRotation: {x: 0.099309005, y: 0.000000027406841, z: -0.0000000027352673, w: 0.9950566}
+  m_LocalRotation: {x: 0.099309005, y: 0.000000027406843, z: -0.0000000027352678, w: 0.9950566}
   m_LocalPosition: {x: 0, y: 1.59, z: -2.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2273,7 +2273,7 @@ Animator:
     'Nose02'\n\tTransform 'Nose02'\n\tTransform 'Dog01_l'\n\tTransform 'Nose01'\n\tand
     more ...\n\tFrom animation clip 'Idle_Battle'\n\tFrom animation clip 'Attack01'\n\tFrom
     animation clip 'RunForwardBattle'\n\tFrom animation clip 'Dizzy'\n\tFrom animation
-    clip 'GetHit'"
+    clip 'GetHit'\n\tFrom animation clip 'Die'\n\tFrom animation clip 'GetHit'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
