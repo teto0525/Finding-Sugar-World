@@ -31,7 +31,7 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void PlayerMove()
+    void Update()
     {
         // 플레이어 움직임 구현
         h = Input.GetAxis("Horizontal");
