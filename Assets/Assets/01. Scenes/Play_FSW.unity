@@ -394,7 +394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4231399028133458, guid: 49bdb26a254ee6642babd4ee87b0175a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4231399028133458, guid: 49bdb26a254ee6642babd4ee87b0175a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -556,8 +556,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 180474491}
-  - {fileID: 1356577393}
   - {fileID: 834624457}
+  - {fileID: 1356577393}
   - {fileID: 751779355}
   - {fileID: 139085486}
   - {fileID: 1537259643}
@@ -1270,6 +1270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EffectPos: {fileID: 60633592}
   ItemEffect: {fileID: 100000, guid: 1bc4a709f24528b40984e62f32e398a0, type: 3}
+  ItemType: {fileID: 0}
 --- !u!65 &751779352
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1343,6 +1344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EffectPos: {fileID: 60633592}
   ItemEffect: {fileID: 100000, guid: aa3fed151f536ee49b583c6a3ac4a2e1, type: 3}
+  ItemType: {fileID: 0}
 --- !u!65 &834624454
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2037,6 +2039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EffectPos: {fileID: 60633592}
   ItemEffect: {fileID: 100004, guid: 3af6f68141914ca43ba39b2403757bd0, type: 3}
+  ItemType: {fileID: 0}
 --- !u!65 &1356577390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3034,6 +3037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   turnSpeed: 200
+  Item: []
 --- !u!136 &1912592301
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3221,7 +3225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4038296408386672, guid: 96dbb51ef19868e4caec5e820639cab3, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4038296408386672, guid: 96dbb51ef19868e4caec5e820639cab3, type: 3}
       propertyPath: m_LocalScale.x

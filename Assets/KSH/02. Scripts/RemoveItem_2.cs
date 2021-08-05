@@ -5,6 +5,7 @@ using UnityEngine;
 public class RemoveItem_2 : MonoBehaviour
 {
     public GameObject ItemEffect;
+
     // Start is called before the first frame update
     void Start()
     {
