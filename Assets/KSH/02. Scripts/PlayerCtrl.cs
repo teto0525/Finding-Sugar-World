@@ -17,6 +17,7 @@ public class PlayerCtrl : MonoBehaviour
 
     // 플레이어 애니메이션
     private Animator anim;
+    private Animation anime;
 
     // 플레이어 아이템
     public GameObject[] Item;
@@ -27,17 +28,17 @@ public class PlayerCtrl : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
-    void Update()
+    void PlayerMove()
     {
         // 플레이어 움직임 구현
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
         r = Input.GetAxis("Mouse X");
         Vector3 dir = ((Vector3.right * h) + (Vector3.forward * v));
+
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
 
