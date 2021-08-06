@@ -6,7 +6,6 @@ public class RemoveItem : MonoBehaviour
 {
     public GameObject EffectPos;
     public GameObject ItemEffect;
-    public GameObject ItemType;
 
 
     // Start is called before the first frame update
@@ -17,15 +16,15 @@ public class RemoveItem : MonoBehaviour
     }
 
 
-    void OnCollisionEnter(Collision coll)
+    void OnTriggerEnter(Collider other)
     {
         Vector3 dir = EffectPos.transform.position;
 
-        if (coll.collider.CompareTag("Player") == true)
+        if (other.gameObject.CompareTag("Player") == true)
         {
             Instantiate(ItemEffect, dir, Quaternion.identity);
             //충돌한 게임 오브젝트 삭제
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
     // Update is called once per frame

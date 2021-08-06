@@ -9,6 +9,10 @@ TagManager:
   - Sword
   - Item
   - Coin
+  - Boss
+  - Potion_Blue
+  - Potion_Purple
+  - Potion_Red
   layers:
   - Default
   - TransparentFX
