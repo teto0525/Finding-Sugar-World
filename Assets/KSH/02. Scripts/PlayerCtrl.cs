@@ -30,7 +30,11 @@ public class PlayerCtrl : MonoBehaviour
     //아이템 변수
     //WeaponManager
     public WeaponManager weaponSwitch;
- 
+
+    public Transform cam;
+    public Transform PlayerPos;
+
+    private Vector3 originPos;
 
 
     // Start is called before the first frame update
@@ -40,6 +44,8 @@ public class PlayerCtrl : MonoBehaviour
 
         //HP  초기화
         currHP = iniHP;
+
+        originPos = transform.position;
 
     }
 
@@ -55,6 +61,9 @@ public class PlayerCtrl : MonoBehaviour
         Vector3 dir = ((Vector3.right * h) + (Vector3.forward * v));
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
+
+        cam.position = Vector3.Lerp(cam.position, PlayerPos.position, 5 * Time.deltaTime);
+        cam.rotation = Quaternion.Lerp(cam.rotation, PlayerPos.rotation, 5 * Time.deltaTime);
 
         //뒤로 이동시 옆으로 이동 불가능
         if (v <= 0)
@@ -132,7 +141,7 @@ public class PlayerCtrl : MonoBehaviour
         // 텔레포트
         void Teleport()
         {
-            transform.position = new Vector3(-77, 5, -34);
+            transform.position = originPos;
         }
 
 
