@@ -34,7 +34,10 @@ public class Enemy_Attack : MonoBehaviour
         PlayerTR = GameObject.FindWithTag("Player").GetComponent<Transform>();
         nvAgent = gameObject.GetComponent<NavMeshAgent>();
 
-        nvAgent.destination = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(10.0f, -10.0f));
+
+        // nvAgent.destination = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
+       
+
         if (isDie == false)
         {
             
@@ -42,7 +45,7 @@ public class Enemy_Attack : MonoBehaviour
             {
                 state = 0;
                 anim.SetTrigger("idle");
-
+                
             }
         }
 
