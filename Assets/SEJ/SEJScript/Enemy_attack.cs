@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Enemy_attack : MonoBehaviour
 {
-        private Animator anim;
-        public GameObject DeathEffect;
+    private Animator anim;
+    public GameObject DeathEffect;
+    private float delay = 0.5f;
+
     // Start is called before the first frame update
     void Start()
         {
@@ -19,25 +21,24 @@ public class Enemy_attack : MonoBehaviour
         }
         private void OnCollisionEnter(Collision collision)
         {
-            //1. 부딪힌 게임오브젝트 파괴
-            // Destroy(collision.gameObject);
-            //2. 나의 게임 오브젝트 파괴
-            // Destroy(gameObject);
-            if (collision.collider.CompareTag("Player") == true)
+        //1. 부딪힌 게임오브젝트 파괴
+        // Destroy(collision.gameObject);
+        //2. 나의 게임 오브젝트 파괴
+        // Destroy(gameObject);
+         if (collision.collider.CompareTag("Player") == true)
             {
                 anim.SetBool("IsAttack", true);
-             
-                Destroy(gameObject, 1.0f);
 
-                //디스트로이 되는 타이밍에 이펙트를 발생시키고 싶다
-                
-                Instantiate(DeathEffect, collision.transform.position, Quaternion.identity);
+                GameObject death = Instantiate(DeathEffect);
+                death.transform.position = transform.position;
 
+                Destroy(this.gameObject, 0.5f);
 
         }
-            else
+        else
             {
-                anim.SetBool("IsAttack", false);
-            }
-        }
+                 anim.SetBool("IsAttack", false);
+             }
+     }
+        
 }

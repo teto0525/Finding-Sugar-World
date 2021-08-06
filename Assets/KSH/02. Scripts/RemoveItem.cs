@@ -6,9 +6,14 @@ public class RemoveItem : MonoBehaviour
 {
     public GameObject EffectPos;
     public GameObject ItemEffect;
+    public GameObject ItemType;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        
+
     }
 
 
