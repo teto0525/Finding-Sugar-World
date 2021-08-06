@@ -151,9 +151,9 @@ public class PlayerCtrl : MonoBehaviour
         StartCoroutine(weaponSwitch.SwitchDelay());
     }
 
-   
+
     // Enemy 피격
-    private void OnCollisionEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         //충돌한 collider가 Enemy이면 HP 차감
         if (currHP >= 0.0f && other.gameObject.CompareTag("Enemy"))
