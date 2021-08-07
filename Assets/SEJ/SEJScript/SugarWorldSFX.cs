@@ -6,7 +6,7 @@ public class SugarWorldSFX : MonoBehaviour
 {
     public AudioClip swAudio;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         AudioSource audio = GetComponent<AudioSource>();
     }
