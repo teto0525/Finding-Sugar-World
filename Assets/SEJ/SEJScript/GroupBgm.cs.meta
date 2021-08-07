@@ -3,7 +3,15 @@ guid: fae2fd2909a5d4648927e80752cf803c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - audioSword: {fileID: 8300000, guid: 2e6ebbf10077e4eb6aebd2161f67ffb2, type: 3}
+  - audioObsDie: {fileID: 8300000, guid: 18ac99afb19fb43ae98e2652a1a20444, type: 3}
+  - audioChestDie: {fileID: 8300000, guid: 0a880a367b6ef4d939b1655cbf2deccc, type: 3}
+  - audioAttackBoss: {fileID: 8300000, guid: 341cee4e07fa9449885fc189ccdba475, type: 3}
+  - audioEatItem: {fileID: 8300000, guid: 1219e8aa13fb04f538c35b8d080bbc0a, type: 3}
+  - audioCoin: {fileID: 8300000, guid: d1ebd7d179b353946a0747c7c29f8b52, type: 3}
+  - audioHeart: {fileID: 8300000, guid: 7c42dc7b6ca7c455d81e87276ceb903b, type: 3}
+  - audioChangeSword: {fileID: 8300000, guid: 5da85ce3a68a74105b8298eb64c11e73, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

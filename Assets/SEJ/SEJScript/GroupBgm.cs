@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class GroupBgm : MonoBehaviour
 {
-    public AudioClip audioChangeSword;
-    public AudioClip audioAttackObs;
+    public AudioClip audioSword;
+    public AudioClip audioObsDie;
+    public AudioClip audioChestDie;
     public AudioClip audioAttackBoss;
     public AudioClip audioEatItem;
+    public AudioClip audioCoin;
+    public AudioClip audioHeart;
+    public AudioClip audioChangeSword;
 
 
 
@@ -15,9 +19,9 @@ public class GroupBgm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        AudioSource audio = GetComponent<AudioSource>();
+    
     }
-
     // Update is called once per frame
     void Update()
     {
