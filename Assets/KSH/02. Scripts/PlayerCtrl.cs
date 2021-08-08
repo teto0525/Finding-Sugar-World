@@ -30,7 +30,7 @@ public class PlayerCtrl : MonoBehaviour
     //아이템 변수
     //WeaponManager
     public WeaponManager weaponSwitch;
- 
+
 
 
     // Start is called before the first frame update
@@ -41,6 +41,7 @@ public class PlayerCtrl : MonoBehaviour
         //HP  초기화
         currHP = iniHP;
 
+     
     }
 
     // Update is called once per frame
@@ -68,7 +69,9 @@ public class PlayerCtrl : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             SwitchWeapons();
+
         }
+
     }
 
     bool isMove;
@@ -201,5 +204,6 @@ public class PlayerCtrl : MonoBehaviour
         gameCtrl.PlayerDie();
 
     }
+   
 
 }
