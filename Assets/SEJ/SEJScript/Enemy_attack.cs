@@ -6,7 +6,7 @@ public class Enemy_attack : MonoBehaviour
 {
     private Animator anim;
     public GameObject DeathEffect;
-    private float delay = 0.5f;
+
 
     // Start is called before the first frame update
     void Start()

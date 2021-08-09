@@ -43,6 +43,8 @@ public class PlayerCtrl : MonoBehaviour
 
     private Vector3 originPos;
 
+    public hp hpUI;
+
 
     // Start is called before the first frame update
     void Start()
@@ -136,6 +138,7 @@ public class PlayerCtrl : MonoBehaviour
     
             //hp가 회복된다
             currHP += 30.0f;
+            hpUI.SetHp(currHP);
         }
 
         // 만약 보라약 먹으면
@@ -144,6 +147,12 @@ public class PlayerCtrl : MonoBehaviour
             // 특정 장소로 이동한다
             Teleport();
         }
+        //정형우 수정=============
+        if (other.gameObject.name.Contains("Coin")||other.gameObject.name.Contains("Gold")||other.gameObject.name.Contains("coin"))
+        {
+            ScoreManager.score += 200;
+        }
+        //========================
 
         // 텔레포트
         void Teleport()
@@ -176,12 +185,13 @@ public class PlayerCtrl : MonoBehaviour
         {
             // 충격 모션
             anim.SetTrigger("gotHit");
-            this.transform.Translate(Vector3.back * 10.0f * moveSpeed * Time.deltaTime);
+            this.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
 
             currHP -= 10.0f;
+            hpUI.SetHp(currHP);
         }
 
-        if (currHP >= 0.0f && other.gameObject.CompareTag("Boss_Sword"))
+        if (currHP >= 0.0f && other.gameObject.CompareTag("Boss"))
         {
             BossAttack();
         }
@@ -189,12 +199,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             PlayerDie();
         }
-        //정형우 수정===
-        if (other.collider.name.Contains("Gold") || other.collider.name.Contains("coin")) 
-        {
-            ScoreManager.score += 200;
-        }
-        //=====
+        
     }
     // Boss
     void BossAttack()
@@ -203,6 +208,7 @@ public class PlayerCtrl : MonoBehaviour
         this.transform.Translate(Vector3.back * 10.0f * moveSpeed * Time.deltaTime);
 
         currHP -= 30.0f;
+        hpUI.SetHp(currHP);
         Debug.Log("Player hp = {iniHP - currHp}");
     }
 

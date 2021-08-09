@@ -27,7 +27,12 @@ public class hp : MonoBehaviour
 
     void HandleHP()
     {
-        hpbar.value = Mathf.Lerp(hpbar.value, (float)currHP / (float)iniHP, Time.deltaTime*0.1f);
+        hpbar.value = Mathf.Lerp(hpbar.value, (float)currHP / (float)iniHP, Time.deltaTime * 10);
+    }
+
+    public void SetHp(float hp)
+    {
+        currHP = hp;
     }
 
 }

@@ -35,7 +35,7 @@ public class Enemy_Attack : MonoBehaviour
         nvAgent = gameObject.GetComponent<NavMeshAgent>();
 
 
-        // nvAgent.destination = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
+        nvAgent.destination = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
        
 
         if (isDie == false)
@@ -50,24 +50,32 @@ public class Enemy_Attack : MonoBehaviour
         }
 
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggernEnter(Collision other)
     {
         if (isDie == false)
         {
 
-            if (collision.collider.tag == "Player")
-            {
+            //if (other.gameObject.tag == "Player" || other.gameObject.tag == "Sword")
+            //{
                 
-                anim.SetTrigger("attack");
-                state = 2;
+            //    anim.SetTrigger("attack");
+            //    state = 2;
 
-            }
-            else if (collision.collider.tag == "Sword")
+            //}
+            if (other.gameObject.tag == "Sword")
             {
                 anim.SetTrigger("isDie");
                 isDie = true;
 
             }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("Player") == true)
+        {
+            anim.SetTrigger("attack");
+            state = 2;
         }
     }
 }
