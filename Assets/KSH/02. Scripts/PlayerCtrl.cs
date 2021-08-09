@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -23,6 +24,12 @@ public class PlayerCtrl : MonoBehaviour
     private readonly float iniHP = 100.0f;
     //현재 생명값
     public float currHP;
+    //죽음 상태
+    private bool isDie = false;
+    //죽음 이펙트
+    public GameObject Deatheffect;
+    public GameObject DeathPos;
+    public float dieDelay = 0.5f;
 
     //gameCtrl
     public GameCtrlNew gameCtrl;
@@ -31,8 +38,8 @@ public class PlayerCtrl : MonoBehaviour
     //WeaponManager
     public WeaponManager weaponSwitch;
 
-    public Transform cam;
-    public Transform PlayerPos;
+    //public Transform cam;
+    //public Transform PlayerPos;
 
     private Vector3 originPos;
 
@@ -62,8 +69,8 @@ public class PlayerCtrl : MonoBehaviour
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
 
-        cam.position = Vector3.Lerp(cam.position, PlayerPos.position, 5 * Time.deltaTime);
-        cam.rotation = Quaternion.Lerp(cam.rotation, PlayerPos.rotation, 5 * Time.deltaTime);
+        //cam.position = Vector3.Lerp(cam.position, PlayerPos.position, 5 * Time.deltaTime);
+        //cam.rotation = Quaternion.Lerp(cam.rotation, PlayerPos.rotation, 5 * Time.deltaTime);
 
         //뒤로 이동시 옆으로 이동 불가능
         if (v <= 0)
@@ -174,7 +181,7 @@ public class PlayerCtrl : MonoBehaviour
             currHP -= 10.0f;
         }
 
-        if (currHP >= 0.0f && other.gameObject.CompareTag("Boss"))
+        if (currHP >= 0.0f && other.gameObject.CompareTag("Boss_Sword"))
         {
             BossAttack();
         }
@@ -195,15 +202,46 @@ public class PlayerCtrl : MonoBehaviour
         Debug.Log("Player hp = {iniHP - currHp}");
     }
 
+    //void PlayerDieAnim()
+    //{
+        //Debug.Log("Player Die!");
 
+       // anim.SetFloat("Speed", 1.0f);
+       //anim.SetTrigger("Die");
+
+       //Vector3 dir = DeathPos.transform.position;
+       //Instantiate(Deatheffect, dir, Quaternion.identity);
+
+       // PlayerDie();
+   // }
+   // public IEnumerator DieDelay()
+    //{
+        //isDie = true;
+        //PlayerDieAnim();
+
+        //yield return new WaitForSeconds(dieDelay);
+
+       //PlayerDie();
+       //isDie = false;
+    //}
 
     //Player 사망처리
     public void PlayerDie()
     {
+
         Debug.Log("Player Die!");
 
         anim.SetFloat("Speed", 1.0f);
         anim.SetTrigger("Die");
+
+        Vector3 dir = DeathPos.transform.position;
+        Instantiate(Deatheffect, dir, Quaternion.identity);
+
+        // 몇초 있다가 플레이어 모델이 사라진다
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        gameObject.SetActive(false);
+
+        // 죽음 상태에서 모두 default -> 몇 초 있다가 씬 전환하기로 바꾼다
 
         // Delay를 줬다가 화면 전환되고 싶다
         // ? 코루틴 함수 이용 혹은 Invoke("gameCtrl.PlayerDie")

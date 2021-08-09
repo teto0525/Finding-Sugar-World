@@ -8,7 +8,8 @@ public class ResultManager : MonoBehaviour
 {
     public GameObject gameOver;
     public GameObject result;
-    public GameObject Button;
+    public GameObject Button1;
+    public GameObject Button2;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class ResultManager : MonoBehaviour
             ));
 
         //다시하기 버튼 크기 0->1
-        iTween.ScaleTo(Button, iTween.Hash(
+        iTween.ScaleTo(Button1, iTween.Hash(
             "x", 1,
             "y", 1,
             "z", 1,
@@ -33,6 +34,15 @@ public class ResultManager : MonoBehaviour
             "easeType", iTween.EaseType.easeOutBounce,
             "delay", 1
             ));
+
+        iTween.ScaleTo(Button2, iTween.Hash(
+          "x", 1,
+          "y", 1,
+          "z", 1,
+          "time", 2,
+          "easeType", iTween.EaseType.easeOutBounce,
+          "delay", 1
+          ));
     }
 
     // Update is called once per frame
@@ -41,9 +51,14 @@ public class ResultManager : MonoBehaviour
         
     }
 
-    void OnclikRetry()
+    public void OnclikRetry()
     {
-        SceneManager.LoadScene("Play_FSW");
+        SceneManager.LoadScene(1);
+    }
+
+    public void OnclikQuit()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void OnCompleteAni()

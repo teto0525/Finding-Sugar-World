@@ -9,6 +9,8 @@ public class PetCtrl : MonoBehaviour
     public GameObject target;
     private float r;
 
+    //public Transform pet;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +25,8 @@ public class PetCtrl : MonoBehaviour
         transform.Translate(dir.normalized * speed * Time.deltaTime);
 
          r = Input.GetAxis("Mouse X");
+
+        //this.position = Vector3.Lerp(pet.position, target.position, 5 * Time.deltaTime);
+        //this.rotation = Quaternion.Lerp(pet.rotation, PlayerPos.rotation, 5 * Time.deltaTime);
     }
 }
