@@ -14,7 +14,7 @@ public class Boss_State : MonoBehaviour
 
     private Animator anim;
     public bool isDie = false;
-
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +34,7 @@ public class Boss_State : MonoBehaviour
         {
             anim.SetBool("ATTACK", true);
 
-
+ 
         }
 
 

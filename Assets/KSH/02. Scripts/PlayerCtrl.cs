@@ -33,8 +33,23 @@ public class PlayerCtrl : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
-    void Start()
+   
+    //오디오
+
+     public AudioClip audioSword;
+     public AudioClip audioObsDie;
+     public AudioClip audioChestDie;
+     public AudioClip audioAttackBoss;
+     public AudioClip audioEatItem;
+     public AudioClip audioCoin;
+     public AudioClip audioHeart;
+     public AudioClip audioChangeSword; 
+    
+    //텔레포트 음원 찾기
+
+
+// Start is called before the first frame update
+void Start()
     {
         anim = GetComponent<Animator>();
 
@@ -115,6 +130,10 @@ public class PlayerCtrl : MonoBehaviour
         {
             // 무기가 바뀐다
             SwitchWeapons();
+            
+            AudioSource audioChangeSword = GetComponent<AudioSource>();
+
+
         }
 
         // 만약 빨간약 먹으면
@@ -123,6 +142,8 @@ public class PlayerCtrl : MonoBehaviour
     
             //hp가 회복된다
             currHP += 30.0f;
+            AudioSource audioEatItem = GetComponent<AudioSource>();
+        
         }
 
         // 만약 보라약 먹으면
@@ -130,12 +151,14 @@ public class PlayerCtrl : MonoBehaviour
         { 
             // 특정 장소로 이동한다
             Teleport();
+            AudioSource audioEatItem = GetComponent<AudioSource>();
         }
 
         // 텔레포트
         void Teleport()
         {
             transform.position = new Vector3(-77, 5, -34);
+
         }
 
 
@@ -187,6 +210,8 @@ public class PlayerCtrl : MonoBehaviour
 
         currHP -= 30.0f;
         Debug.Log("Player hp = {iniHP - currHp}");
+
+         
     }
 
 
@@ -203,7 +228,9 @@ public class PlayerCtrl : MonoBehaviour
         // ? 코루틴 함수 이용 혹은 Invoke("gameCtrl.PlayerDie")
         gameCtrl.PlayerDie();
 
+
     }
    
-
+    
 }
+
