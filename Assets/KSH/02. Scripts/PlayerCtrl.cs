@@ -189,9 +189,13 @@ public class PlayerCtrl : MonoBehaviour
         {
             PlayerDie();
         }
-
+        //정형우 수정===
+        if (other.collider.name.Contains("Gold") || other.collider.name.Contains("coin")) 
+        {
+            ScoreManager.score += 200;
+        }
+        //=====
     }
-
     // Boss
     void BossAttack()
     {

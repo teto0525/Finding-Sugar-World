@@ -32,6 +32,9 @@ public class RemoveItem_2 : MonoBehaviour
 
             Destroy(gameObject);
             Destroy(CoinEffect, 1.0f);
+            
+            
+
         }
     }
     // Update is called once per frame
