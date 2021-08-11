@@ -26,6 +26,8 @@ public class Enemy_Attack : MonoBehaviour
     //플레이어를 찾자
     GameObject player;
 
+    public float currHP_e;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,68 +39,87 @@ public class Enemy_Attack : MonoBehaviour
         MonsterTR = gameObject.GetComponent<Transform>();
         PlayerTR = GameObject.FindWithTag("Player").GetComponent<Transform>();
         nvAgent = gameObject.GetComponent<NavMeshAgent>();
+        float distance = Vector3.Distance(MonsterTR.position, PlayerTR.position);
 
 
-        nvAgent.destination = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
+        //nvAgent.destination = player.transform.position;
 
-        player= GameObject.Find("Player");
         //플레이어를 향하는 방향을 구한다. P - E
-       // dir = player.transform.position - transform.position;
+        // dir = player.transform.position - transform.position;
         //transform.position += dir * Time.deltaTime;
-        
-
-
 
         if (isDie == false)
         {
-            
+
             if (state != 0)
             {
                 state = 0;
                 anim.SetTrigger("idle");
-                
+
+            }
+            else if (distance <= 5)
+            {
+                nvAgent.destination = PlayerTR.position;
+
+                if (state != 1)
+                {
+                    state = 1;
+                    anim.SetTrigger("walk");
+                }
             }
         }
-
-    }
-    private void OnTriggernEnter(Collider other)
-    {
-        if (isDie == false)
+        else if (currHP_e <= 0)
         {
-
-            //if (other.gameObject.tag == "Player" || other.gameObject.tag == "Sword")
-            //{
-                
-            //    anim.SetTrigger("attack");
-            //    state = 2;
-
-            //}
-            //if (other.gameObject.tag == "Sword")
-            //{
-            //    anim.SetTrigger("isDie");
-            //    isDie = true;
-            //    Debug.Log("칼1");
-
-            //}
+            //만약 현재 hp값이 0보다 적으면 죽는 모션,사망처리
+            isDie = true;
+            anim.SetTrigger("isDie");
+            nvAgent.destination = transform.position;
+            Destroy(gameObject, 2f);
         }
     }
-   
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Player") && isDie==false)
-        {
-            transform.LookAt(player.transform.position);
 
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.collider.CompareTag("Sword"))
+        {
+
+            //hp값 줄어들기
+            currHP_e -= 10.0f;
+            //디버그로그로 현재 hp값 출력
+            Debug.Log(currHP_e);
+            Debug.Log("칼 충돌");
+            //player.attack=false 선언
+        }
+        else if (col.collider.CompareTag("Player"))
+        {
             state = 2;
             anim.SetTrigger("attack");
-            
-        }
-        else if (collision.gameObject.CompareTag("Sword"))
-        {
-            anim.SetTrigger("isDie");
-            isDie = true;
-            Debug.Log("칼2");
+            Debug.Log("플레이어 충돌");
+
 
         }
     }
 }
+
+//    private void OnCollisionEnter(Collision collision)
+//    {
+//        if (collision.gameObject.CompareTag("Player") && isDie == false)
+//        {
+//            transform.LookAt(player.transform.position);
+
+//            state = 2;
+//            anim.SetTrigger("attack");
+
+//        }
+//        else if (collision.gameObject.CompareTag("Sword"))
+//        {
+//            anim.SetTrigger("isDie");
+//            isDie = true;
+//            Debug.Log("칼2");
+
+//        }
+//    }
+
+//}
+

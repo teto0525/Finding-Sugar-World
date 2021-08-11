@@ -187,7 +187,7 @@ public class PlayerCtrl : MonoBehaviour
             anim.SetTrigger("gotHit");
             this.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
 
-            currHP -= 10.0f;
+            //currHP -= 10.0f;
             hpUI.SetHp(currHP);
         }
 
