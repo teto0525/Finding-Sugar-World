@@ -178,10 +178,10 @@ public class PlayerCtrl : MonoBehaviour
 
 
     // Enemy 피격
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision collision)
     {
         //충돌한 collider가 Enemy이면 HP 차감
-        if (currHP >= 0.0f && other.gameObject.CompareTag("Enemy"))
+        if (currHP >= 0.0f && collision.gameObject.CompareTag("Enemy"))
         {
             // 충격 모션
             anim.SetTrigger("gotHit");
@@ -191,7 +191,7 @@ public class PlayerCtrl : MonoBehaviour
             hpUI.SetHp(currHP);
         }
 
-        if (currHP >= 0.0f && other.gameObject.CompareTag("Boss"))
+        if (currHP >= 0.0f && collision.gameObject.CompareTag("Boss"))
         {
             BossAttack();
         }

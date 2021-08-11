@@ -21,6 +21,10 @@ public class Enemy_Attack : MonoBehaviour
 
     int state = 0;
     bool isDie = false;
+    Vector3 dir;
+
+    //플레이어를 찾자
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +40,14 @@ public class Enemy_Attack : MonoBehaviour
 
 
         nvAgent.destination = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
-       
+
+        player= GameObject.Find("Player");
+        //플레이어를 향하는 방향을 구한다. P - E
+       // dir = player.transform.position - transform.position;
+        //transform.position += dir * Time.deltaTime;
+        
+
+
 
         if (isDie == false)
         {
@@ -50,7 +61,7 @@ public class Enemy_Attack : MonoBehaviour
         }
 
     }
-    private void OnTriggernEnter(Collision other)
+    private void OnTriggernEnter(Collider other)
     {
         if (isDie == false)
         {
@@ -62,20 +73,32 @@ public class Enemy_Attack : MonoBehaviour
             //    state = 2;
 
             //}
-            if (other.gameObject.tag == "Sword")
-            {
-                anim.SetTrigger("isDie");
-                isDie = true;
+            //if (other.gameObject.tag == "Sword")
+            //{
+            //    anim.SetTrigger("isDie");
+            //    isDie = true;
+            //    Debug.Log("칼1");
 
-            }
+            //}
         }
     }
+   
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("Player") == true)
+        if(collision.gameObject.CompareTag("Player") && isDie==false)
         {
-            anim.SetTrigger("attack");
+            transform.LookAt(player.transform.position);
+
             state = 2;
+            anim.SetTrigger("attack");
+            
+        }
+        else if (collision.gameObject.CompareTag("Sword"))
+        {
+            anim.SetTrigger("isDie");
+            isDie = true;
+            Debug.Log("칼2");
+
         }
     }
 }
