@@ -17,7 +17,7 @@ public class Enemy_Attack : MonoBehaviour
     //0. IDLE
     //1.TRACE
     //2. ATTACK
-    //3. 
+    //3. isDie
 
     int state = 0;
     bool isDie = false;
@@ -26,7 +26,7 @@ public class Enemy_Attack : MonoBehaviour
     //플레이어를 찾자
     GameObject player;
 
-    public float currHP_e;
+    float currHP_e = 30;
 
     // Start is called before the first frame update
     void Start()
@@ -70,12 +70,11 @@ public class Enemy_Attack : MonoBehaviour
         }
         else if (currHP_e <= 0)
         {
-            //만약 현재 hp값이 0보다 적으면 죽는 모션,사망처리
             isDie = true;
-            anim.SetTrigger("isDie");
             nvAgent.destination = transform.position;
-            Destroy(gameObject, 2f);
+            anim.SetTrigger("isDie");
         }
+        
     }
 
 
