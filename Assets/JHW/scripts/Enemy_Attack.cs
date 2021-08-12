@@ -37,19 +37,16 @@ public class Enemy_Attack : MonoBehaviour
 
         // nvAgent.destination = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
        
-
-        if (isDie == false)
-        {
             
-            if (state != 0)
-            {
-                state = 0;
-                anim.SetTrigger("idle");
+       if (state != 0)
+       {
+          state = 0;
+          anim.SetTrigger("idle"); 
                 
-            }
-        }
+       }
 
     }
+<<<<<<< Updated upstream
     private void OnCollisionEnter(Collision collision)
     {
         if (isDie == false)
@@ -63,11 +60,13 @@ public class Enemy_Attack : MonoBehaviour
 
             }
             else if (collision.collider.tag == "Sword")
+=======
+    private void OnTriggernEnter(Collider other)
+    {
+         if (other.gameObject.CompareTag("Sword"))
+>>>>>>> Stashed changes
             {
                 anim.SetTrigger("isDie");
-                isDie = true;
-
             }
-        }
     }
 }

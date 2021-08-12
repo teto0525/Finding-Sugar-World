@@ -30,6 +30,8 @@ public class PlayerCtrl : MonoBehaviour
     public GameObject Deatheffect;
     public GameObject DeathPos;
     public float dieDelay = 0.5f;
+    //죽음 UI
+    public GameObject youdieUI;
 
     //gameCtrl
     public GameCtrlNew gameCtrl;
@@ -49,9 +51,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         anim = GetComponent<Animator>();
 
-        //HP  초기화
+        // HP  초기화
         currHP = iniHP;
 
+        // Teleport
         originPos = transform.position;
 
     }
@@ -68,6 +71,10 @@ public class PlayerCtrl : MonoBehaviour
         Vector3 dir = ((Vector3.right * h) + (Vector3.forward * v));
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
+
+        //밀림 현상 해결
+        //rigidbody.velocity = Vector3.zero;
+
 
         //cam.position = Vector3.Lerp(cam.position, PlayerPos.position, 5 * Time.deltaTime);
         //cam.rotation = Quaternion.Lerp(cam.rotation, PlayerPos.rotation, 5 * Time.deltaTime);
@@ -121,6 +128,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    //아이템 스크립트
     void OnTriggerEnter(Collider other)
     {
         // 만약 파란약 먹으면
@@ -176,7 +184,11 @@ public class PlayerCtrl : MonoBehaviour
         {
             // 충격 모션
             anim.SetTrigger("gotHit");
+<<<<<<< Updated upstream
             this.transform.Translate(Vector3.back * 10.0f * moveSpeed * Time.deltaTime);
+=======
+            //this.transform.Translate(Vector3.back * 0.1f * Time.deltaTime);
+>>>>>>> Stashed changes
 
             currHP -= 10.0f;
         }
@@ -230,8 +242,6 @@ public class PlayerCtrl : MonoBehaviour
     {
 
         Debug.Log("Player Die!");
-
-        anim.SetFloat("Speed", 1.0f);
         anim.SetTrigger("Die");
 
         Vector3 dir = DeathPos.transform.position;
@@ -239,7 +249,7 @@ public class PlayerCtrl : MonoBehaviour
 
         // 몇초 있다가 플레이어 모델이 사라진다
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
 
         // 죽음 상태에서 모두 default -> 몇 초 있다가 씬 전환하기로 바꾼다
 
