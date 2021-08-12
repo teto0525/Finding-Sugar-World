@@ -88,9 +88,9 @@ public class Monster_Trace : MonoBehaviour
     {
         if (hit == 3)
         {
-            anim.SetTrigger("DIE");
             isDie = true;
-            BoxCollider boss = GetComponent<BoxCollider>();
+            anim.SetTrigger("DIE");
+           gameObject.GetComponent<BoxCollider>().enabled=false;
 
         }
     }
