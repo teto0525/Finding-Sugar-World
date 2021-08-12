@@ -26,10 +26,15 @@ public class RemoveItem : MonoBehaviour
             //충돌한 게임 오브젝트 삭제
             Destroy(this.gameObject);
         }
+
+        if (other.gameObject.name.Contains("Coin") || other.gameObject.name.Contains("Gold") || other.gameObject.name.Contains("coin"))
+        {
+            ScoreManager.score += 200;
+        }
+
     }
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

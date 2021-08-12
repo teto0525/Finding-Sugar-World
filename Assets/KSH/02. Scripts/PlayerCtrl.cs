@@ -33,6 +33,7 @@ public class PlayerCtrl : MonoBehaviour
 
 
 
+<<<<<<< Updated upstream
    
     //오디오
 
@@ -46,6 +47,12 @@ public class PlayerCtrl : MonoBehaviour
      public AudioClip audioChangeSword; 
     
     //텔레포트 음원 찾기
+=======
+    public hp hpUI;
+    
+ 
+
+>>>>>>> Stashed changes
 
 
 // Start is called before the first frame update
@@ -122,6 +129,9 @@ void Start()
             }
         }
     }
+    
+    //아이템 스크립트
+    //오디오 추가
 
     void OnTriggerEnter(Collider other)
     {
@@ -131,9 +141,12 @@ void Start()
             // 무기가 바뀐다
             SwitchWeapons();
             
+<<<<<<< Updated upstream
             AudioSource audioChangeSword = GetComponent<AudioSource>();
 
 
+=======
+>>>>>>> Stashed changes
         }
 
         // 만약 빨간약 먹으면
@@ -154,11 +167,18 @@ void Start()
             AudioSource audioEatItem = GetComponent<AudioSource>();
         }
 
-        // 텔레포트
-        void Teleport()
+    
+    // 텔레포트
+    void Teleport()
         {
+<<<<<<< Updated upstream
             transform.position = new Vector3(-77, 5, -34);
 
+=======
+            transform.position = originPos;
+
+            
+>>>>>>> Stashed changes
         }
 
 

@@ -13,6 +13,16 @@ public class WeaponManager : MonoBehaviour
 
 	private int index = 0;
 	private bool isSwitching = false;
+	//오디오
+	AudioSource audioSource;
+	public AudioSource SWaudio;//스위치웨폰
+	public AudioSource ATaudio;//공격
+	public AudioSource TPaudio;//텔레포트
+	public AudioSource Heartaudio;//하트증가
+
+
+
+
 
 	void Start()
 	{
@@ -34,7 +44,9 @@ public class WeaponManager : MonoBehaviour
         {
 			Vector3 dir = effectPos.transform.position;
 			Instantiate(chEffect, dir, Quaternion.identity);
-        }
+			SWaudio = gameObject.GetComponent<AudioSource>(); //스위치웨폰 오디오
+			SWaudio.Play();
+		}
     }
 
 	public IEnumerator SwitchDelay()

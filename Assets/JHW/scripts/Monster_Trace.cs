@@ -19,6 +19,11 @@ public class Monster_Trace : MonoBehaviour
     int hit = 0;
 
     public bool isDie = false;
+    public AudioClip bossAudio; //보스 소리
+  
+
+    AudioSource audioSource;
+
 
     void Start()
     {
@@ -90,6 +95,8 @@ public class Monster_Trace : MonoBehaviour
         {
             anim.SetTrigger("DIE");
             isDie = true;
+            AudioSource bossAudio = GetComponent<AudioSource>();
+            bossAudio.Play();
         }
     }
 

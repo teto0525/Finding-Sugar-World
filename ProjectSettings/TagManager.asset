@@ -13,6 +13,12 @@ TagManager:
   - Potion_Blue
   - Potion_Purple
   - Potion_Red
+<<<<<<< Updated upstream
+=======
+  - SugarWorld
+  - Boss_Sword
+  - ChestM
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
