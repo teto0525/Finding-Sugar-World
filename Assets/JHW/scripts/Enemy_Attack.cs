@@ -73,7 +73,7 @@ public class Enemy_Attack : MonoBehaviour
         }
         else if (currHP_e <= 0)
         {
-                isDie = true;
+            isDie = true;
             gameObject.GetComponent<BoxCollider>().enabled = false;
             nvAgent.destination = transform.position;
 
@@ -82,9 +82,9 @@ public class Enemy_Attack : MonoBehaviour
                 CreateExploEffect();
                 state = 3;
                 anim.SetTrigger("isDie");
+                SoundManager.instance.EnemyDie();
                 Destroy(gameObject, 1.0f);
             }
-
         }
 
     }

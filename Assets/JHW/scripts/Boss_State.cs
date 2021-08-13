@@ -42,6 +42,7 @@ public class Boss_State : MonoBehaviour
         {
             anim.SetBool("DIE", true);
             isDie = true;
+           
         }
     }
 }

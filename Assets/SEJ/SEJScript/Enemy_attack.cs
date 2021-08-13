@@ -31,7 +31,7 @@ public class Enemy_attack : MonoBehaviour
 
                 GameObject death = Instantiate(DeathEffect);
                 death.transform.position = transform.position;
-
+                SoundManager.instance.ChestDie();
                 Destroy(this.gameObject, 0.5f);
 
         }
