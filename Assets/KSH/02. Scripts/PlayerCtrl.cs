@@ -157,6 +157,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             // 무기가 바뀐다
             SwitchWeapons();
+            SoundManager.instance.PickItem_B();
         }
 
         // 만약 빨간약 먹으면
@@ -166,6 +167,7 @@ public class PlayerCtrl : MonoBehaviour
             //hp가 회복된다
             currHP += 30.0f;
             hpUI.SetHp(currHP);
+            SoundManager.instance.PickItem_R();
         }
 
         // 만약 보라약 먹으면
@@ -173,11 +175,13 @@ public class PlayerCtrl : MonoBehaviour
         { 
             // 특정 장소로 이동한다
             Teleport();
+            SoundManager.instance.PickItem_P();
         }
         //정형우 수정=============
         if (other.gameObject.name.Contains("Coin")||other.gameObject.name.Contains("Gold")||other.gameObject.name.Contains("coin"))
         {
             ScoreManager.score += 200;
+            SoundManager.instance.PickItem_Coin();
         }
         //========================
 

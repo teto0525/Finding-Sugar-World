@@ -91,6 +91,7 @@ public class Monster_Trace : MonoBehaviour
             anim.SetTrigger("DIE");
             isDie = true;
             BoxCollider boss = GetComponent<BoxCollider>();
+            SoundManager.instance.BossDie();
 
         }
     }

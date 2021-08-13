@@ -73,6 +73,8 @@ public class Enemy_Attack : MonoBehaviour
             isDie = true;
             nvAgent.destination = transform.position;
             anim.SetTrigger("isDie");
+            SoundManager.instance.EnemyDie();
+
         }
         
     }
