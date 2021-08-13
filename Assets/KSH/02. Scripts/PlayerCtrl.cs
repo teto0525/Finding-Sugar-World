@@ -8,6 +8,9 @@ using System;
 public class PlayerCtrl : MonoBehaviour
 {
 
+    // 플레이어 rigidbody 설정
+    public Rigidbody rb;
+
     // 플레이어 움직임 (앞뒤좌우 + 턴)
     private float h;
     private float v;
@@ -24,12 +27,15 @@ public class PlayerCtrl : MonoBehaviour
     private readonly float iniHP = 100.0f;
     //현재 생명값
     public float currHP;
-    //죽음 상태
-    private bool isDie = false;
+    //죽었나 안 죽었나
+    bool isAlive =  true;
     //죽음 이펙트
     public GameObject Deatheffect;
     public GameObject DeathPos;
     public float dieDelay = 0.5f;
+
+    // 사운드
+    // public SoundManager soundmanager;
 
     //gameCtrl
     public GameCtrlNew gameCtrl;
@@ -45,10 +51,15 @@ public class PlayerCtrl : MonoBehaviour
 
     public hp hpUI;
 
+    CharacterController cc;
 
     // Start is called before the first frame update
     void Start()
     {
+        cc = GetComponent<CharacterController>();
+
+        //rb
+        rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
         //HP  초기화
@@ -61,33 +72,48 @@ public class PlayerCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 플레이어 움직임 구현
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
-        r = Input.GetAxis("Mouse X");
 
-
-        Vector3 dir = ((Vector3.right * h) + (Vector3.forward * v));
-        transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
-        transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
-
-        //cam.position = Vector3.Lerp(cam.position, PlayerPos.position, 5 * Time.deltaTime);
-        //cam.rotation = Quaternion.Lerp(cam.rotation, PlayerPos.rotation, 5 * Time.deltaTime);
-
-        //뒤로 이동시 옆으로 이동 불가능
-        if (v <= 0)
+        //치트키 목록
+        //죽기
+        if (Input.GetKey(KeyCode.Z))
         {
-            h = 0;
+            //PlayerDie();
+            anim.SetTrigger("gotHit");
         }
 
-        PlayerAnim();
-
-
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (isAlive == true)
         {
-            SwitchWeapons();
+            // 플레이어 움직임 구현
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
+            r = Input.GetAxis("Mouse X");
+
+
+            //Vector3 dir = ((Vector3.right * h) + (Vector3.forward * v));
+            //transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
+            Vector3 dir = ((transform.right * h) + (transform.forward * v));
+            cc.Move(dir.normalized * moveSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
+
+            //cam.position = Vector3.Lerp(cam.position, PlayerPos.position, 5 * Time.deltaTime);
+            //cam.rotation = Quaternion.Lerp(cam.rotation, PlayerPos.rotation, 5 * Time.deltaTime);
+
+            //뒤로 이동시 옆으로 이동 불가능
+            if (v <= 0)
+            {
+                h = 0;
+            }
+
+            PlayerAnim();
+
+            // 치트키
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                SwitchWeapons();
+            }
         }
     }
+    
 
     bool isMove;
     void PlayerAnim()
@@ -112,6 +138,7 @@ public class PlayerCtrl : MonoBehaviour
         else if (Input.GetButtonDown("Fire1"))
         {
             anim.SetTrigger("Attack");
+            SoundManager.instance.Playerattack();
         }
         else
         {
@@ -174,6 +201,8 @@ public class PlayerCtrl : MonoBehaviour
     public void SwitchWeapons()
     {
         StartCoroutine(weaponSwitch.SwitchDelay());
+        // 무기 바뀌는 소리
+        //SoundManager.instance.Blue;
     }
 
 
@@ -214,34 +243,60 @@ public class PlayerCtrl : MonoBehaviour
 
     //void PlayerDieAnim()
     //{
-        //Debug.Log("Player Die!");
+    //Debug.Log("Player Die!");
 
-       // anim.SetFloat("Speed", 1.0f);
-       //anim.SetTrigger("Die");
+    // anim.SetFloat("Speed", 1.0f);
+    //anim.SetTrigger("Die");
 
-       //Vector3 dir = DeathPos.transform.position;
-       //Instantiate(Deatheffect, dir, Quaternion.identity);
+    //Vector3 dir = DeathPos.transform.position;
+    //Instantiate(Deatheffect, dir, Quaternion.identity);
 
-       // PlayerDie();
-   // }
-   // public IEnumerator DieDelay()
+    // PlayerDie();
+    // }
+    // public IEnumerator DieDelay()
     //{
-        //isDie = true;
-        //PlayerDieAnim();
+    //isDie = true;
+    //PlayerDieAnim();
 
-        //yield return new WaitForSeconds(dieDelay);
+    //yield return new WaitForSeconds(dieDelay);
 
-       //PlayerDie();
-       //isDie = false;
+    //PlayerDie();
+    //isDie = false;
     //}
 
     //Player 사망처리
+    //public void PlayerDie()
+    //{
+
+    //    Debug.Log("Player Die!");
+
+    //    anim.SetFloat("Speed", 1.0f);
+    //    anim.SetTrigger("Die");
+
+    //    Vector3 dir = DeathPos.transform.position;
+    //    Instantiate(Deatheffect, dir, Quaternion.identity);
+
+    //    // 몇초 있다가 플레이어 모델이 사라진다
+    //    t
+    //    gameObject.GetComponent<CapsuleCollider>().enabled = false;
+
+    //    gameObject.SetActive(false);
+
+    //    // 죽음 상태에서 모두 default -> 몇 초 있다가 씬 전환하기로 바꾼다
+
+    //    // Delay를 줬다가 화면 전환되고 싶다
+    //    // ? 코루틴 함수 이용 혹은 Invoke("gameCtrl.PlayerDie")
+    //    gameCtrl.PlayerDie();
+
+    //}
+
     public void PlayerDie()
     {
+        isAlive = false;
 
         Debug.Log("Player Die!");
 
-        anim.SetFloat("Speed", 1.0f);
+        anim.SetFloat("Speed", 0.5f);
         anim.SetTrigger("Die");
 
         Vector3 dir = DeathPos.transform.position;
@@ -249,7 +304,9 @@ public class PlayerCtrl : MonoBehaviour
 
         // 몇초 있다가 플레이어 모델이 사라진다
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        gameObject.SetActive(false);
+        EnableRagdoll();
+
+        //gameObject.SetActive(false);
 
         // 죽음 상태에서 모두 default -> 몇 초 있다가 씬 전환하기로 바꾼다
 
@@ -257,6 +314,13 @@ public class PlayerCtrl : MonoBehaviour
         // ? 코루틴 함수 이용 혹은 Invoke("gameCtrl.PlayerDie")
         gameCtrl.PlayerDie();
 
+    }
+
+    // ragdoll 만들기
+    void EnableRagdoll()
+    {
+        rb.isKinematic = true;
+        rb.detectCollisions = false;
     }
 
 }
