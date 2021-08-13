@@ -28,6 +28,8 @@ public class Enemy_Attack : MonoBehaviour
 
     float currHP_e = 30;
 
+    public GameObject Explosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +50,7 @@ public class Enemy_Attack : MonoBehaviour
         // dir = player.transform.position - transform.position;
         //transform.position += dir * Time.deltaTime;
 
-        if (isDie == false)
+        if (isDie == false && currHP_e > 0)
         {
 
             if (state != 0)
@@ -65,18 +67,26 @@ public class Enemy_Attack : MonoBehaviour
                 {
                     state = 1;
                     anim.SetTrigger("walk");
+
                 }
             }
         }
         else if (currHP_e <= 0)
         {
             isDie = true;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             nvAgent.destination = transform.position;
-            anim.SetTrigger("isDie");
-            SoundManager.instance.EnemyDie();
 
+            if (state != 3)
+            {
+                CreateExploEffect();
+                state = 3;
+                anim.SetTrigger("isDie");
+                SoundManager.instance.EnemyDie();
+                Destroy(gameObject, 1.0f);
+            }
         }
-        
+
     }
 
 
@@ -88,8 +98,8 @@ public class Enemy_Attack : MonoBehaviour
             //hp값 줄어들기
             currHP_e -= 10.0f;
             //디버그로그로 현재 hp값 출력
-            Debug.Log(currHP_e);
-            Debug.Log("칼 충돌");
+            Debug.Log("에너미hp : " + currHP_e);
+
             //player.attack=false 선언
         }
         else if (col.collider.CompareTag("Player"))
@@ -100,6 +110,19 @@ public class Enemy_Attack : MonoBehaviour
 
 
         }
+    }
+    void CreateExploEffect()
+    {
+        // 폭발공장에서 폭발효과 만든다.
+        GameObject Explosion2 = Instantiate(Explosion);
+        // 만들어진 폭발효과를 enemy(나자신)의 위치에 놓는다
+        Explosion2.transform.position = transform.position;
+        //만들어진 폭발효과에서 ParticleSystem 컴포넌트를 가져온다
+        ParticleSystem ps = Explosion2.GetComponent<ParticleSystem>();
+        //가져온 컴포넌트의 기능중 play를 실행
+        ps.Play();
+
+        Destroy(Explosion2, 3);
     }
 }
 
