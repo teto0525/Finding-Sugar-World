@@ -174,8 +174,8 @@ public class PlayerCtrl : MonoBehaviour
         if (other.gameObject.CompareTag("Potion_Purple"))
         { 
             // 특정 장소로 이동한다
-            Teleport();
             SoundManager.instance.PickItem_P();
+            Teleport();
         }
         //정형우 수정=============
         if (other.gameObject.name.Contains("Coin")||other.gameObject.name.Contains("Gold")||other.gameObject.name.Contains("coin"))
