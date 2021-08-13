@@ -45,6 +45,9 @@ public class PlayerCtrl : MonoBehaviour
 
     public hp hpUI;
 
+    public bool goldExplo = false;
+ 
+
 
     // Start is called before the first frame update
     void Start()
@@ -199,7 +202,14 @@ public class PlayerCtrl : MonoBehaviour
         {
             PlayerDie();
         }
-        
+        //∞ÒµÂπÊ «‘¡§∞«µÈ∏È µ∑ 0
+        if (collision.gameObject.name.Contains("Obstacle_G"))
+        {
+            ScoreManager.score = 0;
+            goldExplo = true;
+        }
+
+
     }
     // Boss
     void BossAttack()
