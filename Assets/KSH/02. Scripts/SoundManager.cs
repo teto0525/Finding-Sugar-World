@@ -27,9 +27,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip Obs2die;// 비홀더몬스터 죽음
     public AudioClip Bossdie;// 보스죽음
     public AudioClip Coin;// 코인먹음
+    public AudioClip Gothit; //플레이어 공격당함
 
 
- 
 
 
 
@@ -90,5 +90,10 @@ public class SoundManager : MonoBehaviour
     public void BossDie()
     {
         audio.PlayOneShot(Bossdie);
+    }
+
+    public void PlayerGotHit()
+    {
+        audio.PlayOneShot(Gothit);
     }
 }

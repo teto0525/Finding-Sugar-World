@@ -79,6 +79,8 @@ public class PlayerCtrl : MonoBehaviour
         {
             //PlayerDie();
             anim.SetTrigger("gotHit");
+           
+    
         }
 
         if (isAlive == true)
@@ -219,7 +221,7 @@ public class PlayerCtrl : MonoBehaviour
             // 충격 모션
             anim.SetTrigger("gotHit");
             this.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
-
+            SoundManager.instance.PlayerGotHit();
             //currHP -= 10.0f;
             hpUI.SetHp(currHP);
         }
