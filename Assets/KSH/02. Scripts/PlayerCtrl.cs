@@ -73,6 +73,7 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
 
+       
         //치트키 목록
         //죽기
         if (Input.GetKey(KeyCode.Z))
@@ -89,11 +90,12 @@ public class PlayerCtrl : MonoBehaviour
             r = Input.GetAxis("Mouse X");
 
 
-            //Vector3 dir = ((Vector3.right * h) + (Vector3.forward * v));
-            //transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
-            Vector3 dir = ((transform.right * h) + (transform.forward * v));
-            cc.Move(dir.normalized * moveSpeed * Time.deltaTime);
+            Vector3 dir = ((Vector3.right * h) + (Vector3.forward * v));
+            transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
+            //Vector3 dir = ((transform.right * h) + (transform.forward * v));
+            //cc.Move(dir.normalized * moveSpeed * Time.deltaTime);
             transform.Rotate(Vector3.up * turnSpeed * r * Time.deltaTime);
+            
 
             //cam.position = Vector3.Lerp(cam.position, PlayerPos.position, 5 * Time.deltaTime);
             //cam.rotation = Quaternion.Lerp(cam.rotation, PlayerPos.rotation, 5 * Time.deltaTime);
@@ -113,7 +115,12 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
     }
-    
+
+    private void LateUpdate()
+    {
+        rb.velocity = Vector3.zero;
+    }
+
 
     bool isMove;
     void PlayerAnim()
@@ -175,7 +182,7 @@ public class PlayerCtrl : MonoBehaviour
         { 
             // 특정 장소로 이동한다
             SoundManager.instance.PickItem_P();
-            Teleport();
+            StartCoroutine(Teleport());
         }
         //정형우 수정=============
         if (other.gameObject.name.Contains("Coin")||other.gameObject.name.Contains("Gold")||other.gameObject.name.Contains("coin"))
@@ -184,13 +191,6 @@ public class PlayerCtrl : MonoBehaviour
             SoundManager.instance.PickItem_Coin();
         }
         //========================
-
-        // 텔레포트
-        void Teleport()
-        {
-            transform.position = originPos;
-        }
-
 
 
         //만약 최종관문을 통과하면
@@ -201,7 +201,18 @@ public class PlayerCtrl : MonoBehaviour
         }
 
     }
-    
+
+
+
+    // 텔레포트
+    IEnumerator Teleport()
+    {
+        //cc.enabled = false;
+        yield return new WaitForSeconds(0.1f);
+        transform.position = originPos;
+        //cc.enabled = true;
+    }
+
     public void SwitchWeapons()
     {
         StartCoroutine(weaponSwitch.SwitchDelay());
