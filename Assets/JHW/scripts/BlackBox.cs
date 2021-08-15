@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BlackBox : MonoBehaviour
 {
-    public bool destroyCoin;
-    // Start is called before the first frame update
+    public bool destroyCoin=false;
+    private Transform PlayerTR;
+    public GameObject hit_effect;
+
     void Start()
     {
         
@@ -14,14 +16,31 @@ public class BlackBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        PlayerTR = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.name.Contains("Player"))
+    //    {
+    //        destroyCoin = true;
+    //        ScoreManager.score -= 700;
+    //    }
+    //}
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.name.Contains("Player"))
+        if (collision.gameObject.name.Contains("Player"))
         {
             destroyCoin = true;
+            ScoreManager.score -= 700;
+
+            GameObject Hit_effect = Instantiate(hit_effect);
+            Hit_effect.transform.position = PlayerTR.transform.position;
+            ParticleSystem ps = Hit_effect.GetComponent<ParticleSystem>();
+            ps.Play();
+
+            Destroy(Hit_effect, 3);
         }
+
     }
 }
